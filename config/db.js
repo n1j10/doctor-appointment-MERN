@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import dns from "node:dns";
 
-// const FALLBACK_DNS_SERVERS = ["8.8.8.8", "1.1.1.1"];
+const FALLBACK_DNS_SERVERS = ["8.8.8.8", "1.1.1.1"];
 
 const shouldRetryWithDnsFallback = (error) => {
     const message = error?.message || "";
