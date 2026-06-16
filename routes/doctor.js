@@ -50,9 +50,13 @@ router.post("/addDoctors", upload.single('image'), async(req,res)=> {
 })
 
 router.get("/allDoctors", async(req,res)=> {
-    const doctors = await Doctor.find()
-
-    res.json(doctors);
+    try {
+        const doctors = await Doctor.find()
+        res.json(doctors);
+    } catch (error) {
+        console.error("Error fetching doctors:", error);
+        res.status(500).json({ message: "Error fetching doctors" });
+    }
 })
 
 

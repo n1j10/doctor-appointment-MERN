@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import API_URL from '../config/api'
 
 function Stats() {
 
@@ -7,9 +8,9 @@ function Stats() {
     useEffect(()=>{
         const fetchStats= async()=>{
             try {
-                const doctorsStats= await fetch("http://localhost:3000/doctors/count")
+                const doctorsStats= await fetch(`${API_URL}/doctors/count`)
 
-                const departmentsStats= await fetch("http://localhost:3000/departments/count")
+                const departmentsStats= await fetch(`${API_URL}/departments/count`)
 
                 const  doctorsData = await doctorsStats.json()
 

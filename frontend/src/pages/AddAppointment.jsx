@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../context/AuthContext';
+import API_URL from '../config/api'
 
 function AddAppointment() {
 
@@ -13,7 +14,7 @@ function AddAppointment() {
 
      useEffect(()=>{
         const fetchDoctor = async()=>{
-            const res = await fetch("http://localhost:3000/doctors/allDoctors")
+            const res = await fetch(`${API_URL}/doctors/allDoctors`)
             const data = await res.json()
             setDoctors(data)
         }
@@ -33,7 +34,7 @@ function AddAppointment() {
         console.log("Token:", token);
 
         try {
-            const res = await fetch("http://localhost:3000/appointments/createAppointment",{
+            const res = await fetch(`${API_URL}/appointments/createAppointment`,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

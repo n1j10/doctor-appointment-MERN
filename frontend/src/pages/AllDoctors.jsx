@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import API_URL from '../config/api'
 
 function AllDoctors() {
     const [doctors,setDoctors] = useState([])
@@ -8,7 +9,7 @@ function AllDoctors() {
     useEffect(()=>{
         const fetchedDoctors = async()=>{
             try {
-                const res = await fetch("http://localhost:3000/doctors/allDoctors")
+                const res = await fetch(`${API_URL}/doctors/allDoctors`)
                 const data = await res.json()
                 if(!res.ok) throw new Error(data.message || "Failed to fetch doctors")
                     setDoctors(data)
@@ -26,7 +27,7 @@ function AllDoctors() {
                 {doctors?.map((doc)=>(
                     <div className="bg-white rounded-lg shadow p-4 text-center" key={doc?._id}>
                         <Link to={`/doctor/${doc._id}`}>
-                        <img  className="w-32 h-32 mx-auto rounded-full object-cover border mb-4" src={`http://localhost:3000/uploads/${doc?.image}`}/>
+                        <img  className="w-32 h-32 mx-auto rounded-full object-cover border mb-4" src={`${API_URL}/uploads/${doc?.image}`}/>
 
                         <h3 className="text-xl font-semibold">{doc?.name}</h3>
 

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
+import API_URL from '../config/api'
 
 function AddDepartment() {
   const { user } = useContext(AuthContext);
@@ -56,7 +57,7 @@ function AddDepartment() {
       formData.append("description", form.description.trim());
       if (form.image) formData.append("image", form.image);
 
-      const res = await fetch("http://localhost:3000/departments/addDepartments", {
+      const res = await fetch(`${API_URL}/departments/addDepartments`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: formData,

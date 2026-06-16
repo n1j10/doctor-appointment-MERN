@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import { useNavigate } from "react-router-dom";
+import API_URL from '../config/api'
 
 function Login() {
 
@@ -15,7 +16,7 @@ function Login() {
     const handleSubmit= async(e)=>{
         e.preventDefault()
         setError(null)
-        const res = await fetch("http://localhost:3000/user/signin",{
+        const res = await fetch(`${API_URL}/user/signin`,{
              method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(form),

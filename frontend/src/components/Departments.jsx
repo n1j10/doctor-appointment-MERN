@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import API_URL from '../config/api'
 
 function Departments() {
 
@@ -7,7 +8,7 @@ function Departments() {
 
 
     useEffect(()=>{
-       fetch("http://localhost:3000/departments/allDepartments").then(async (res)=>{
+       fetch(`${API_URL}/departments/allDepartments`).then(async (res)=>{
         const data = await res.json();
         if(!res.ok){
           throw new Error(data.message || "Failed to fetch departments");
@@ -62,7 +63,7 @@ function Departments() {
                               {dep?.image ? (
                                 <img
                                   className="w-72 h-48 rounded-lg object-cover shadow"
-                                  src={`http://localhost:3000/uploads/${dep.image}`}
+                                  src={`${API_URL}/uploads/${dep.image}`}
                                   alt={dep.name}
                                 />
                               ) : null}
