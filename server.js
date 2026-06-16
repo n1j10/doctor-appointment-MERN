@@ -6,37 +6,44 @@ import User from "./routes/user.js"
 import Departments from "./routes/Departments.js";
 import Doctor from "./routes/doctor.js"
 import Appointment from "./routes/appointment.js"
-const app = express()
-app.use(express.json())
 
 dotenv.config();
-const PORT = process.env.PORT || 3000
 
+const app = express()
+app.use(express.json())
 app.use(cors())
+
+// Connect to DB (cached for serverless)
+let isConnected = false;
+const ensureDB = async () => {
+    if (!isConnected) {
+        await connectDB();
+        isConnected = true;
+    }
+};
+
+// Connect on startup
+ensureDB().catch(err => console.error("Initial DB connection failed:", err.message));
+
+// Routes
 app.use("/user", User);
 app.use("/doctors", Doctor);
 app.use("/appointments", Appointment);
 app.use("/departments", Departments);
+app.use("/uploads", express.static("uploads"));
 
-app.use("/uploads",express.static("uploads"))
+// Root route so "GET /" doesn't return "Cannot GET /"
+app.get("/", (req, res) => {
+    res.json({ message: "Doctor Appointment API is running" });
+});
 
-const DB_RETRY_MS = Number(process.env.DB_RETRY_MS || 5000);
-let isServerListening = false;
+// Only listen when running locally (not on Vercel)
+if (process.env.NODE_ENV !== "production") {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+        console.log(`server is running on port ${PORT}`);
+    });
+}
 
-const startServer = async () => {
-    try {
-        await connectDB();
-        if (!isServerListening) {
-            app.listen(PORT , ()=>{
-                console.log(`server is running on port ${PORT}`)
-            });
-            isServerListening = true;
-        }
-    } catch (error) {
-        console.error(`Failed to start server: ${error.message}`);
-        console.log(`Retrying MongoDB connection in ${DB_RETRY_MS / 1000}s...`);
-        setTimeout(startServer, DB_RETRY_MS);
-    }
-};
-
-startServer();
+// Export for Vercel serverless
+export default app;

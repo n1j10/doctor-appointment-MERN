@@ -6,7 +6,7 @@ const router = express.Router();
 router.post("/createAppointment", auth(),  async(req,res)=>{
 
         const {doctor,date,reason} = req.body
-        if(!doctor || !date || !reason) return res.status(400).json({ message: "Missing fields" });
+        if(!doctor || !date || !reason) return res.status(400).json({ message: "Missing fieldss" });
         const appointment = await Appointment.create({
             user: req.user.id,
             doctor,
