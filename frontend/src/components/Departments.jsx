@@ -7,7 +7,7 @@ function Departments() {
 
 
     useEffect(()=>{
-       fetch("http://localhost:5000/departments/allDepartments").then(async (res)=>{
+       fetch("http://localhost:3000/departments/allDepartments").then(async (res)=>{
         const data = await res.json();
         if(!res.ok){
           throw new Error(data.message || "Failed to fetch departments");
@@ -62,7 +62,7 @@ function Departments() {
                               {dep?.image ? (
                                 <img
                                   className="w-72 h-48 rounded-lg object-cover shadow"
-                                  src={`http://localhost:5000/uploads/${dep.image}`}
+                                  src={`http://localhost:3000/uploads/${dep.image}`}
                                   alt={dep.name}
                                 />
                               ) : null}

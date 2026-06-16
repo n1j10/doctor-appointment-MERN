@@ -13,7 +13,7 @@ function AddAppointment() {
 
      useEffect(()=>{
         const fetchDoctor = async()=>{
-            const res = await fetch("http://localhost:5000/doctors/allDoctors")
+            const res = await fetch("http://localhost:3000/doctors/allDoctors")
             const data = await res.json()
             setDoctors(data)
         }
@@ -33,7 +33,7 @@ function AddAppointment() {
         console.log("Token:", token);
 
         try {
-            const res = await fetch("http://localhost:5000/appointments/createAppointment",{
+            const res = await fetch("http://localhost:3000/appointments/createAppointment",{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

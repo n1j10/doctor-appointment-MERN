@@ -7,9 +7,9 @@ function Stats() {
     useEffect(()=>{
         const fetchStats= async()=>{
             try {
-                const doctorsStats= await fetch("http://localhost:5000/doctors/count")
+                const doctorsStats= await fetch("http://localhost:3000/doctors/count")
 
-                const departmentsStats= await fetch("http://localhost:5000/departments/count")
+                const departmentsStats= await fetch("http://localhost:3000/departments/count")
 
                 const  doctorsData = await doctorsStats.json()
 

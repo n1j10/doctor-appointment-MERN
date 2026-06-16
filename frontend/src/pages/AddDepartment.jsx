@@ -56,7 +56,7 @@ function AddDepartment() {
       formData.append("description", form.description.trim());
       if (form.image) formData.append("image", form.image);
 
-      const res = await fetch("http://localhost:5000/departments/addDepartments", {
+      const res = await fetch("http://localhost:3000/departments/addDepartments", {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: formData,

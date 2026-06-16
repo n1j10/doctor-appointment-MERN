@@ -15,7 +15,7 @@ function MyAppointments() {
     const fetchAppointmens = async()=> {
   try {
         const token = localStorage.getItem("token")
-        const res = await fetch("http://localhost:5000/appointments/myAppointments",{
+        const res = await fetch("http://localhost:3000/appointments/myAppointments",{
           headers:{Authorization: `Bearer ${token}`}
         })
         const data = await res.json()
@@ -33,7 +33,7 @@ function MyAppointments() {
   const cancelAppointment = async(id) => {
     try {
       const token = localStorage.getItem("token")
-      const res = await fetch(`http://localhost:5000/appointments/deleteAppointment/${id}`,{
+      const res = await fetch(`http://localhost:3000/appointments/deleteAppointment/${id}`,{
         method:"POST",
          headers: { 
           Authorization: `Bearer ${token}`,
@@ -73,7 +73,7 @@ function MyAppointments() {
                   <div className='flex  items-center gap-4'>
 
 
-                    <img className='w-20 h-20 rounded-full object-cover border' src={`http://localhost:5000/uploads/${app?.doctor?.image}`}/>
+                    <img className='w-20 h-20 rounded-full object-cover border' src={`http://localhost:3000/uploads/${app?.doctor?.image}`}/>
 
                   <div>
 
